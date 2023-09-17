@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Car Loan Calculator</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+        .calculator-container {
+            font-family: "Roboto", sans-serif;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            /* background-color: #3BB4C3; */
+        }
+
+        .calculator-body {
+            width: 75%;
+            color: #1a1311;
+        }
+
+        .calculator-body .title {
+            font-size: 40px;
+            line-height: 28px;
+            color: #3BB4C3;
+        }
+
+        .calculator-body .calculator-values-conatiner {
+            /* margin-top: 7%; */
+            border: 1px solid #e0e7ef;
+            color: #425164;
+            display: flex;
+            margin: 7% 0%;
+        }
+
+        .calculator-values-conatiner .calculator-input-section {
+            background-color: #f8fafe;
+            width: 40%;
+            font-size: 20px;
+            line-height: 31.2px;
+            padding: 60px 60px;
+            box-sizing: border-box;
+        }
+
+        .calculator-input-section .seeking-amount-value {
+            font-size: 32px;
+            line-height: 32px;
+            color: #101c2a;
+        }
+
+        .calculator-input-section #seeking-amount-value-slider {
+            width: 80%;
+        }
+
+        .calculator-input-section .input-type-select {
+            border: 1px solid;
+            background-color: #f8fafe;
+            height: 45px;
+            font-size: 17px;
+            width: 100%;
+            border-color: #cfd8e5;
+            padding-left: 10px;
+        }
+
+        .calculator-values-conatiner .calculator-output-section {
+            width: 60%;
+            text-align: center;
+            padding: 30px 30px;
+            background: url("./logo.png");
+            background-repeat: no-repeat;
+            background-position: bottom;
+            background-size: 200px;
+            background-color: #3BB4C3;
+            color: #fff;
+        }
+
+        .calculator-output-section .output-button a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .calculator-output-section .output-button {
+            color: #fff;
+            background-color: transparent;
+            border-color: #05c2f0;
+            display: inline-block;
+            font-weight: 500;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            user-select: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: 2px solid #fff;
+            cursor: pointer;
+            padding: 0.313rem 1rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: 5px;
+
+        }
+
+        .calculator-output-section #output-values {
+            font-size: 40px;
+            line-height: 72px;
+            /* color: #101c2a; */
+        }
+
+
+
+        .calculator-values-conatiner #term-length {
+            width: 105%;
+        }
+
+        /* -------------------- Media query--------------------- */
+        @media only screen and (max-width: 550px) {
+            .calculator-container {
+                width: 100%;
+                display: block;
+                padding: 10px 10px;
+                box-sizing: border-box;
+            }
+
+            .calculator-body {
+                width: 100%;
+            }
+
+            .calculator-body .title {
+                font-size: 2.5rem;
+                line-height: 2.5rem;
+            }
+
+            .calculator-body .paragraph {
+                margin: 1rem 0px 1rem 0px;
+                font-size: 1.1rem;
+                line-height: 1.2rem;
+            }
+
+            .calculator-body .calculator-values-conatiner {
+                border: 1px solid #e0e7ef;
+                color: #425164;
+                display: block;
+                width: 100%;
+            }
+
+            .calculator-values-conatiner .calculator-input-section {
+                width: 100%;
+            }
+
+
+
+            .calculator-input-section .seeking-amount-value {
+                font-size: 17px;
+                line-height: 20px;
+                color: #a0a5aa;
+            }
+
+            .calculator-input-section #seeking-amount-value-slider {
+                background: none;
+            }
+
+            .calculator-values-conatiner .calculator-output-section {
+                padding-top: 50px;
+                width: 100%;
+                font-size: 18px;
+                line-height: 21px;
+                padding: 50px 30px 30px 30px;
+                background: none;
+                text-align: center;
+                box-sizing: border-box;
+
+            }
+
+
+            .calculator-values-conatiner .tooltip .tooltiptext {
+                width: 200px;
+                margin-left: -120px;
+            }
+
+            .calculator-values-conatiner .tooltip {
+                font-size: 15px;
+            }
+
+            .calculator-values-conatiner .tooltip .tooltiptext::after {
+                left: 49%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="calculator-container">
+        <div class="calculator-body">
+            <h1 class="title">
+                What does this Car Loan Calculator do?
+            </h1>
+            <p class="paragraph">
+                Use our Car Loan Calculator to calculate monthly, fortnightly or weekly Car Loan repayments for a car or
+                motor vehicle in Australia. <br> <br>
+
+                You can structure your car loan calculation based on an interest rate, loan term (length) in weeks,
+                months or years, amount borrowed (financed) and residual value (balloon value).
+            </p>
+
+            <div class="calculator-values-conatiner">
+                <div class="calculator-input-section">
+                    <div class="input">
+                        <p>
+                            I would like to borrow ($)
+                        </p>
+                        <div class="input-style">
+                            <input type="text" class="input-type-select" onkeyup="ppvalchange(this.value);" min="5000"
+                                step="1" max="250000" value="1250000" id="amount-seeking-slider">
+                        </div>
+                    </div>
+                    <div class="input">
+                        <p> Over The Term Length of</p>
+                        <select name="" class="input-type-select" id="term-length" oninput="getvalues();">
+                            <option value="1">1 year</option>
+                            <option value="2">2 year</option>
+                            <option value="3">3 year</option>
+                            <option value="4">4 year</option>
+                            <option value="5">5 year</option>
+                            <option value="6">6 year</option>
+                            <option value="7">7 year</option>
+                            <option value="8">8 year</option>
+                            <option value="9">9 year</option>
+                            <option value="10">10 year</option>
+                            <option value="11">11 year</option>
+                            <option value="12">12 year</option>
+                            <option value="13">13 year</option>
+                            <option value="14">14 year</option>
+                            <option value="15">15 year</option>
+                        </select>
+
+                    </div>
+                    <div class="input">
+                        <p>At Interest Rate (%)</p>
+                        <input type="text" name="" value="0.70" class="input-type-select" id="interest-rate"
+                            oninput="getvalues();">
+                    </div>
+                </div>
+                <div class="calculator-output-section">
+                    <h3 style="font-size: 24px; line-height: 22px; letter-spacing: 1.8px">
+                        Estimated Monthly Repayments
+                    </h3>
+                    <h1 id="output-values">$ 2,700.00</h1>
+                    <h3 style="font-size: 25px; line-height: 10px">
+                        Ready to say lendpire?
+                    </h3>
+                    <p>Take 15 minutes to find out what you qualify.</p>
+                    <button class="output-button"><a href="http://www.lendpire.com.au/question-form/"> YEAH, I HAVE 15
+                            MINUTES</a></button>
+                </div>
+            </div>
+            <p class="paragraph" style="color: #ff5722;">
+                Disclaimer: Any calculation made using this calculator is intended as a guide only. It is for
+                illustrative purposes only, and based on the information you provide. Quoted repayments do not include
+                lender fees and charges.
+            </p>
+        </div>
+    </div>
+    <script>
+        let
+            amountSeekingSliderElement,
+            termLengthElement,
+            interestRateElement,
+            outputValueElement;
+        var amountSeeking,
+            termLength,
+            interestRate,
+            outputValue;
+        getelement();
+        function getelement() {
+            amountSeekingSliderElement = document.getElementById("amount-seeking-slider");
+            termLengthElement = document.getElementById("term-length");
+            interestRateElement = document.getElementById("interest-rate");
+            outputValueElement = document.getElementById("output-values");
+            ppvalchange(amountSeekingSliderElement.value);
+        }
+        function getvalues() {
+            amountSeeking = remove_thousands_separators(amountSeekingSliderElement.value);
+            termLength = termLengthElement.value;
+            interestRate = interestRateElement.value;
+            resultcalculate();
+        }
+        function resultcalculate() {
+            interestRate /= 1200;
+            termLength *= 12;
+            console.log(interestRate);
+            console.log(termLength);
+            outputValue = 
+            (amountSeeking * (interestRate * Math.pow(1 + interestRate, termLength)) / (Math.pow(1 + interestRate, termLength) - 1));
+           
+            // ROUND(fieldname1    * (fieldname2/1200) * (POW(1+(fieldname2/1200),(fieldname3*12))) / (POW(1+(fieldname2/1200),(fieldname3*12))-1) +65)
+
+
+
+            // outputValue = parseFloat(outputValue);
+            // outputValue = outputValue.toFixed(2);
+            // outputValue += 65;
+            outputValue=Math.round(outputValue);
+            outputValue=parseInt(outputValue);
+            outputValueElement.innerHTML = "$ " + thousands_separators(outputValue);
+        }
+
+
+        // floor(  ((fieldname1 / fieldname3) / 12) + ((fieldname1 * (fieldname2 / 100))/12)  )
+
+
+        function ppvalchange(n) {
+            if (n != "") {
+                num = remove_thousands_separators(n);
+                amountSeekingSliderElement.value = num;
+                getvalues();
+                num = thousands_separators(num);
+                amountSeekingSliderElement.value = num;
+            }
+
+        }
+        function thousands_separators(num) {
+            num = num.toString().split(".");
+            num[0] = num[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return num.join(".");
+        }
+        function remove_thousands_separators(num) {
+            num = num.replace(/,/g, "");
+            num = parseInt(num);
+            return num;
+        }
+
+    </script>
+</body>
+
+</html>
